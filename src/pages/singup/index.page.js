@@ -1,7 +1,16 @@
 import React from "react";
 import { Box, Button, Input } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
 
 function SingUp() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
+
   return (
     <Box
       backgroundColor="gray.200"
@@ -11,16 +20,16 @@ function SingUp() {
     >
       <br />
       <br />
-      <br />
-      <br />
       <Box
+        as="form"
         boxShadow="lg"
         rounded="md"
         bg="white"
         maxWidth={"400px"}
-        maxHeight={"500px"}
+        minHeight={"400px"}
         align="center"
         p="12"
+        onSubmit={handleSubmit(onSubmit)}
       >
         <Box as="h1" fontWeight="600" fontSize="40px">
           Unete a la comunidad
@@ -29,11 +38,31 @@ function SingUp() {
           {" "}
           Enterate de todo lo que el futbol tiene para ofrecer{" "}
         </Box>
-        <Input type="text" placeholder="Nombre" mx="2" mt="2" />
-        <Input type="text" placeholder="Apellido" mx="2" mt="2" />
-        <Input type="email" placeholder="email" mx="2" mt="2" />
-        <Input type="password" placeholder="password" mx="2" mt="2" />
-        <Button colorScheme="blue" mt="4">
+        <Input type="text" placeholder="Nombre" mt="2" {...register("name", { required: true })}/>
+        {errors.name?.type === "required" && (
+          <Box textAlign="left" color="red" fontSize="xs">
+            Necesitas ingresar un nombre
+          </Box>
+        )}
+        <Input type="text" placeholder="Apellido" mt="2" {...register("lastname", { required: true })}/>
+        {errors.lastname?.type === "required" && (
+          <Box textAlign="left" color="red" fontSize="xs">
+            Necesitas ingresar un apellido
+          </Box>
+        )}
+        <Input type="email" placeholder="email" mt="2" {...register("email", { required: true })}/>
+        {errors.email?.type === "required" && (
+          <Box textAlign="left" color="red" fontSize="xs">
+            Necesitas ingresar un correo
+          </Box>
+        )}
+        <Input type="password" placeholder="password" mt="2" {...register("password", { required: true })} />
+        {errors.password?.type === "required" && (
+          <Box textAlign="left" color="red" fontSize="xs">
+            Necesitas ingresar una contraseña
+          </Box>
+        )}
+        <Button type="submit" colorScheme="blue" mt="4">
           Registrate
         </Button>
       </Box>

@@ -1,7 +1,16 @@
 import React from "react";
-import { Box, Input, Button, Flex, Spacer } from "@chakra-ui/react";
+import { Box, Input, Button } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
 
 function Login() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
+
   return (
     <Box
       backgroundColor="gray.200"
@@ -18,6 +27,7 @@ function Login() {
       <br />
       <br />
       <Box
+        as="form"
         boxShadow="lg"
         rounded="md"
         bg="white"
@@ -25,6 +35,7 @@ function Login() {
         maxHeight={"500px"}
         align="center"
         p="12"
+        onSubmit={handleSubmit(onSubmit)}
       >
         <Box as="h1" fontWeight="600" fontSize="40px">
           Bienvenido
@@ -33,10 +44,29 @@ function Login() {
           {" "}
           inicia sesión{" "}
         </Box>
-        <Input type="email" placeholder="email" mt="2" />
-        <Input type="password" placeholder="password" mt="2" />
-
-        <Button colorScheme="blue" mt="4">
+        <Input
+          type="email"
+          placeholder="email"
+          mt="2"
+          {...register("email", { required: true })}
+        />
+        {errors.email?.type === "required" && (
+          <Box textAlign="left" color="red" fontSize="xs">
+            Necesitas ingresar tu correo
+          </Box>
+        )}
+        <Input
+          type="password"
+          placeholder="password"
+          mt="2"
+          {...register("password", { required: true })}
+        />
+        {errors.password?.type === "required" && (
+          <Box textAlign="left" color="red" fontSize="xs">
+            Necesitas ingresar tu contraseña
+          </Box>
+        )}
+        <Button type="submit" colorScheme="blue" mt="4">
           iniciar sesión
         </Button>
 
