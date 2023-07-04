@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Input} from "@chakra-ui/react";
+import { Box, Button, Input } from "@chakra-ui/react";
 
 function SingUp() {
   return (
@@ -9,10 +9,10 @@ function SingUp() {
       minW="100vw"
       align="center"
     >
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+      <br />
+      <br />
+      <br />
+      <br />
       <Box
         boxShadow="lg"
         rounded="md"
@@ -22,17 +22,20 @@ function SingUp() {
         align="center"
         p="12"
       >
-        <Box as="h1" fontWeight="600" fontSize="40px" >
-          Unete a la comunidad 
+        <Box as="h1" fontWeight="600" fontSize="40px">
+          Unete a la comunidad
         </Box>
         <Box as="h1" fontWeight="600" color="gray.400">
           {" "}
-          Enterate de todo lo que el futbol tiene para ofrecer {" "}
+          Enterate de todo lo que el futbol tiene para ofrecer{" "}
         </Box>
-          <Input placeholder="Nombre" mx="2" mt="2" />
-          <Input placeholder="Apellido" mx="2" mt="2" />
-          <Input placeholder="email" mx="2" mt="2" />
-          <Input placeholder="password" mx="2" mt="2" />
+        <Input type="text" placeholder="Nombre" mx="2" mt="2" />
+        <Input type="text" placeholder="Apellido" mx="2" mt="2" />
+        <Input type="email" placeholder="email" mx="2" mt="2" />
+        <Input type="password" placeholder="password" mx="2" mt="2" />
+        <Button colorScheme="blue" mt="4">
+          Registrate
+        </Button>
       </Box>
     </Box>
   );
